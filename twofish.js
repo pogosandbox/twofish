@@ -208,12 +208,12 @@
   };
 
   /* eslint-disable no-shadow */
-  exports.twofish = function twofish(IV) {
+  exports.twofish = function twofish(IV, seed) {
   /* eslint-enable no-shadow */
 
     /* eslint-disable no-bitwise*/
     var utils = functionUtils()
-      , rng = new RNG()
+      , rng = new RNG(seed)
       , initializingVector = []
       // S-boxes
       , P0 = new Uint8Array([

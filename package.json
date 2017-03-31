@@ -1,6 +1,6 @@
 {
   "name": "twofish",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Javascript Twofish implementation.",
   "homepage": "https://github.com/wouldgo/twofish",
   "keywords": [
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/wouldgo/twofish.git"
+    "url": "git:/github.com/pogosandbox/twofish.git"
   },
   "license": "MIT",
   "devDependencies": {
