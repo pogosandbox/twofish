@@ -187,6 +187,11 @@
     return this.state;
   };
 
+  RNG.prototype.nextByte = function nextByte() {
+    this.state = ((this.a * this.state + this.c) >> 16) & 0x7FFF;
+    return this.state;
+  }
+
   RNG.prototype.nextFloat = function nextFloat() {
 
     // returns in range [0,1]
@@ -206,6 +211,8 @@
 
     return array[this.nextRange(0, array.length)];
   };
+
+  exports.rand = RNG;
 
   /* eslint-disable no-shadow */
   exports.twofish = function twofish(IV, seed) {
@@ -1045,7 +1052,7 @@
 
       for (blockSizeIndex = 0; blockSizeIndex < BLOCK_SIZE; blockSizeIndex += 1) {
 
-        initializingVector.push(rng.nextRange(0, 256));
+        initializingVector.push(rng.nextByte());
       }
     } else if (IV &&
       utils.isAnArray(IV) &&
@@ -1059,7 +1066,7 @@
       initialLength = IV.length;
       for (paddingIndex = 0; paddingIndex < BLOCK_SIZE - initialLength; paddingIndex += 1) {
 
-        IV.push(rng.nextRange(0, 256));
+        IV.push(rng.nextByte());
       }
       initializingVector = new Uint8Array(IV);
     } else if (IV &&
@@ -1077,7 +1084,6 @@
     initializingVector = new Uint8Array(initializingVector);
 
     return {
-
       'equalsArray': utils.areEqual,
       'byteArrayToString': utils.UTF8ArrToStr,
       'stringToByteArray': utils.strToUTF8Arr,
